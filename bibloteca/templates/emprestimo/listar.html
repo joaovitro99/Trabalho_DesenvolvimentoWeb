@@ -1,0 +1,39 @@
+{% extends base_html %}
+{% load static %}
+{% block titulo %} Listagem de anuncios {% endblock %}
+
+
+{% block conteudo %}
+
+
+
+{{ emprestimos|length }} emprestimo(s)
+
+<ul class="list-group">
+    {% for emprestimo in emprestimos %}
+    <li class="list-group-item">
+        <div class="vehicle-card">
+    {% if emprestimo.livro.foto %}
+        <img src="{{ emprestimo.livro.foto.url }}" class="card-img-top vehicle-image" >
+    {% else %}
+        <div class="vehicle-image-placeholder">Sem foto</div>
+    {% endif %}
+    <div class="vehicle-info">
+        <div class="brand-model">
+            <div class="brand">{{ emprestimo.livro.titulo }}</div>
+            <div class="model">Usuario: {{ emprestimo.usuario }}</div>
+        </div>
+        <div class="details">
+            <div class="row">Data de emprestimo: {{ emprestimo.data_emprestimo }}</div>
+            <div class="row">Data de devolução: {{ emprestimo.data_devolucao_prevista }}</div>
+        </div>
+        <a href="{% url 'editar-emprestimos' emprestimo.pk %}" class="btn btn-primary">Editar</a>
+        <a href="{% url 'deletar-emprestimos' emprestimo.pk %}" class="btn btn-danger">Deletar</a>
+    </div>
+</div>
+
+    </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

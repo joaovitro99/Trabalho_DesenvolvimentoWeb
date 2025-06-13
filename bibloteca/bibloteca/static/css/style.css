@@ -1,0 +1,93 @@
+html, body{
+    height:100%;
+}
+.formulario{
+    max-width: 350px;
+    padding: 1rem;
+    margin: 1px green;
+}
+
+.list-group {
+    list-style: none;
+    padding: 0;
+    display: flex; 
+    flex-direction: row; 
+    flex-wrap: wrap; 
+    gap: 20px;
+}
+
+.list-group-item {
+    border: none; 
+    padding: 0; 
+    margin-bottom: 0; 
+    background-color: transparent; 
+}
+
+
+.vehicle-card {
+    width: 220px; /* Aumentei um pouco a largura */
+    border: 1px solid #ccc; /* Borda mais suave */
+    border-radius: 8px;
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    overflow: hidden; /* Garante que a imagem e o conteúdo fiquem dentro do card */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adiciona uma leve sombra */
+    background-color: white; /* Fundo branco para melhor contraste */
+}
+
+.card-img-top {
+    width: 100%;
+    height: auto; /* Mantém a proporção da imagem */
+    max-height: 120px; /* Altura máxima para a imagem */
+    object-fit: contain; /* Recorta a imagem para cobrir o espaço sem distorcer muito */
+}
+
+.vehicle-image {
+    width: 100%;
+    height: 200px;
+    object-fit: contain; /* Faz a imagem "cortar" ao invés de esticar */
+    display: block;
+}
+
+.vehicle-image-placeholder {
+    background-color: #ddd;
+    color: #555;
+    display: flex;
+    object-fit: cover;
+    justify-content: center;
+    align-items: center;
+    height: 120px;
+    width: 100%;
+    font-size: 0.9em;
+}
+
+.vehicle-info {
+    padding: 10px;
+    text-align: center;
+}
+
+.brand-model {
+    margin-bottom: 8px;
+}
+
+.brand {
+    font-weight: bold;
+    font-size: 1.1em;
+    color: #333;
+}
+
+.model {
+    font-size: 1em;
+    color: #666;
+}
+
+.details {
+    font-size: 0.9em;
+    color: #777;
+}
+
+.details .row {
+    margin-bottom: 4px;
+}

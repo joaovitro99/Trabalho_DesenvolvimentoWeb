@@ -1,0 +1,57 @@
+{% extends "base.html" %} {# Assumindo que seu base.html está na raiz dos templates ou em um diretório acessível #}
+{% load static %} {# Carrega a tag static para lidar com arquivos estáticos #}
+
+{% block titulo %} Cadastro {% endblock %} {# Define o título da página como "Cadastro" #}
+
+{% block conteudo %}
+<div class="d-flex align-items-center py-4">
+    <main class="w-100 m-auto formulario">
+        <form action="{% url 'cadastro' %}" method="post" class="space-y-6">
+            {% csrf_token %} {# Token de segurança obrigatório para formulários Django #}
+            <h1 class="text-3xl font-extrabold text-gray-900 text-center">Cadastre-se</h1>
+            <p class="mt-2 text-center text-sm text-gray-600">
+                Crie sua conta para acessar todas as funcionalidades.
+            </p>
+
+            {# Mensagens de erro ou sucesso do Django, se houver #}
+            {% if messages %}
+                <ul class="list-none p-0 m-0">
+                    {% for message in messages %}
+                        <li class="p-3 rounded-md text-sm {% if message.tags == 'error' %}bg-red-100 text-red-700{% elif message.tags == 'success' %}bg-green-100 text-green-700{% else %}bg-blue-100 text-blue-700{% endif %}">
+                            {{ message }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            <div class="form-floating">
+                <input type="user" name="usuario" class="form-control" id="floatingInputUsuario" placeholder="user"/>
+                <label for="floatingInputUsuario">Nome do Usuario</label>
+            </div>
+            <div class="form-floating">
+                <input type="email" name="email" class="form-control" id="floatingInputEmail" placeholder="name@example.com"/>
+                <label for="floatingInputEmail">Email</label>
+            </div>
+            <div class="form-floating">
+                <input type="password" name="senha" class="form-control" id="floatingInputSenha" placeholder="senha"/>
+                <label for="floatingInputSenha">Senha</label>
+            </div>
+            <div class="form-floating">
+                <input type="password" name="confirmar_senha" class="form-control" id="floatingInputConfirmarSenha" placeholder="confirmar senha"/>
+                <label for="floatingInputConfirmarSenha">Confirmar Senha</label>
+            </div>
+
+            <button
+                type="submit"
+                class="btn btn-primary w-100 py-2"
+            >
+                Cadastrar
+            </button>
+
+            <p class="mt-4 text-center text-sm text-gray-600">
+                Já tem uma conta? <a href="{% url 'login' %}" class="font-medium text-blue-600 hover:text-blue-500">Faça login aqui</a>.
+            </p>
+        </form>
+    </main>
+</div>
+{% endblock %}

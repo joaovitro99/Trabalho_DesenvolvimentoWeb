@@ -1,0 +1,41 @@
+{% extends base_html %}
+{% load static %}
+{% block titulo %} Listagem dos Meus Livros {% endblock %}
+
+
+{% block conteudo %}
+
+<a href="{% url 'criar-livros' %}" class="btn btn-primary">Adicionar Livro</a>
+
+{{ livros|length }} livro(s)
+
+<ul class="list-group">
+    {% for livro in livros %}
+    <li class="list-group-item">
+        <div class="vehicle-card">
+    {% if livro.foto %}
+        <img src="{{ livro.foto.url }}" class="card-img-top vehicle-image" alt="{{ livro.titulo }}">
+    {% else %}
+        <div class="vehicle-image-placeholder">Sem foto</div>
+    {% endif %}
+    <div class="vehicle-info">
+        <div class="brand-model">
+            <div class="brand">{{ livro.titulo }}</div>
+            <div class="model">{{ livro.get_autor_display }}</div>
+        </div>
+        <div class="details">
+            <div class="row">Ano: {{ livro.ano }}</div>
+            <div class="row">Número de páginas: {{ livro.numero_de_paginas }}</div>
+            <div class="row">Disponivel: {{ livro.disponivel }}</div>
+        </div>
+        <a href="{% url 'editar-livros' livro.pk %}" class="btn btn-primary">Editar</a>
+        <a href="{% url 'deletar-livros' livro.pk %}" class="btn btn-danger">Deletar</a>
+    </div>
+</div>
+
+    </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
+

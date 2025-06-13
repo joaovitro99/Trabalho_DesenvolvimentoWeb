@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block titulo%} Login {% endblock%}</title>
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="{% static 'js/bootstrap/bootstrap.js' %}"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+
+    
+</head>
+<body>
+    <header>
+        {% block menu %}
+        <nav class="navbar navbar-expand-lg navbar-primary">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#">
+              <img src="{% static 'img/download.png' %}" width="70" height="70"/>
+              </a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'listar-outros-livros' %}">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'listar-livros' %}" tabindex="-1" aria-disabled="true">Meus livros</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'logout' %}">Logout</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'listar-emprestimos' %}">Meus emprestimos</a>
+                  </li>
+                </ul>           
+              </div>
+            </div>
+        </nav>
+        {% endblock %}
+    </header>
+    
+    <div class="conteudo">
+        {% block conteudo %}{% endblock %}
+    </div>
+</body>
+</html>
