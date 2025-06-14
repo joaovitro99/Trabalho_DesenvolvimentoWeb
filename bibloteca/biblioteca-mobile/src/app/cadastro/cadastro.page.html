@@ -1,0 +1,21 @@
+<ion-content [fullscreen]="true">
+  <form (submit)="cadastroUsuario()">
+    <ion-list>
+      <ion-item>
+        <ion-input label="Usuário" type="text" name="usuario" [(ngModel)]="instancia.username"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input label="mail" type="password" name="email" [(ngModel)]="instancia.email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input label="Senha" type="password" name="senha" [(ngModel)]="instancia.password"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input label="Confirmar Senha" type="password" name="confirmPassword" [(ngModel)]="instancia.confirmPassword"></ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-button expand="block" (click)="cadastroUsuario()">
+      Criar conta
+    </ion-button>
+  </form>
+</ion-content>

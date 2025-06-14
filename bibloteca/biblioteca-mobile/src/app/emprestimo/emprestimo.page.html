@@ -1,0 +1,54 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Cadastrar Empréstimo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div >
+    <h1 >Cadastre um novo empréstimo</h1>
+    
+    <form (submit)="salvarEmprestimo()">
+      <ion-list >
+        
+        <!-- Campo Livro (Select) -->
+        <ion-item  lines="none">
+          <ion-label position="floating" color="medium">Livro</ion-label>
+          <ion-select [(ngModel)]="emprestimo.livro" name="livro" placeholder="Selecione um livro" interface="popover">
+            <ion-select-option *ngFor="let livro of listaLivros" [value]="livro.id">
+              {{ livro.titulo }} ({{ livro.autor }})
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <!-- Campo Data de Devolução -->
+        <ion-item  lines="none">
+          <ion-label position="floating" color="medium">Data de devolução prevista</ion-label>
+          <ion-datetime-button datetime="dataDevolucao"></ion-datetime-button>
+        </ion-item>
+
+        <ion-modal [keepContentsMounted]="true">
+          <ng-template>
+            <ion-datetime
+              id="dataDevolucao"
+              presentation="date"
+              [min]="minDate"
+              [(ngModel)]="emprestimo.data_devolucao_prevista"
+              name="data_devolucao_prevista"
+              locale="pt-BR"
+              size="cover"
+            ></ion-datetime>
+          </ng-template>
+        </ion-modal>
+
+      </ion-list>
+      
+      <ion-button expand="block" type="submit"  color="primary">
+        Pegar Emprestado
+      </ion-button>
+    </form>
+  </div>
+</ion-content>
