@@ -6,10 +6,13 @@ from django.views.generic import ListView,CreateView,View,UpdateView,DeleteView
 from django.http import FileResponse,Http404
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.mixins import LoginRequiredMixin
-from rest_framework.generics import ListAPIView
+from rest_framework.generics import ListAPIView,DestroyAPIView,CreateAPIView
 from rest_framework.authentication import TokenAuthentication
 from rest_framework import permissions
-from livro.serializers import SerializadorLivro
+from livro.serializers import SerializadorLivro,SerializadorAutor
+from livro.consts import *
+from rest_framework.views import APIView
+from rest_framework.response import Response
 # Create your views here.
 class ListarLivros(LoginRequiredMixin, ListView):
     model = Livro 
@@ -90,4 +93,27 @@ class APIListarLivros(ListAPIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
+        return Livro.objects.filter(disponivel=True)
+    
+class APICriarLivros(CreateAPIView):
+    serializer_class = SerializadorLivro
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
+
+    
+    
+class APIDeletarlivros(DestroyAPIView):
+    serializer_class = SerializadorLivro
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
+    def get_queryset(self):
         return Livro.objects.all()
+    
+class APIListarAutores(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get(self, request):
+        autores = [{"id": id, "nome": nome} for id, nome in OPCOES_AUTORES]
+        serializer = SerializadorAutor(autores, many=True)
+        return Response(serializer.data)

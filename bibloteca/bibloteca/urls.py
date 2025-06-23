@@ -27,6 +27,7 @@ urlpatterns = [
     path('livro/', include('livro.urls'),name='livros'),
     path('emprestimo/', include('emprestimo.urls'),name='emprestimo'),
     path('autenticacao-api/',LoginAPI.as_view()),
+    path('cadastro-api/',CadastroAPI.as_view()),
     
 ]
 if settings.DEBUG:

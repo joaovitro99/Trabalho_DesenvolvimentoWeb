@@ -1,0 +1,43 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/livro"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Cadastrar Livro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="ion-padding">
+    <h1>Cadastre um novo livro</h1>
+
+    <form (submit)="salvarLivro()">
+      <ion-list>
+        <ion-item lines="none">
+          <ion-input label="Título" labelPlacement="floating" type="text" name="titulo" [(ngModel)]="livro.titulo" required></ion-input>
+        </ion-item>
+
+        <ion-item lines="none">
+          <ion-label position="floating" color="medium">Autor</ion-label>
+          <ion-select [(ngModel)]="livro.autor" name="autor" placeholder="Selecione um autor" interface="popover" required>
+            <ion-select-option *ngFor="let autor of listaAutores" [value]="autor.id">
+              {{ autor.nome }} </ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item lines="none">
+          <ion-input label="Ano de Publicação" labelPlacement="floating" type="number" name="ano" [(ngModel)]="livro.ano"></ion-input>
+        </ion-item>
+
+        <ion-item lines="none">
+          <ion-input label="Número de paginas" labelPlacement="floating" type="number" name="numero_de_paginas" [(ngModel)]="livro.numero_de_paginas"></ion-input>
+        </ion-item>
+
+        </ion-list>
+
+      <ion-button expand="block" type="submit" color="primary">
+        Cadastrar Livro
+      </ion-button>
+    </form>
+  </div>
+</ion-content>

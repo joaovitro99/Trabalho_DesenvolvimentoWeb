@@ -19,30 +19,17 @@
           <ion-label position="floating" color="medium">Livro</ion-label>
           <ion-select [(ngModel)]="emprestimo.livro" name="livro" placeholder="Selecione um livro" interface="popover">
             <ion-select-option *ngFor="let livro of listaLivros" [value]="livro.id">
-              {{ livro.titulo }} ({{ livro.autor }})
+              {{ livro.titulo }} 
             </ion-select-option>
           </ion-select>
         </ion-item>
 
-        <!-- Campo Data de Devolução -->
-        <ion-item  lines="none">
-          <ion-label position="floating" color="medium">Data de devolução prevista</ion-label>
-          <ion-datetime-button datetime="dataDevolucao"></ion-datetime-button>
-        </ion-item>
+       
 
-        <ion-modal [keepContentsMounted]="true">
-          <ng-template>
-            <ion-datetime
-              id="dataDevolucao"
-              presentation="date"
-              [min]="minDate"
-              [(ngModel)]="emprestimo.data_devolucao_prevista"
-              name="data_devolucao_prevista"
-              locale="pt-BR"
-              size="cover"
-            ></ion-datetime>
-          </ng-template>
-        </ion-modal>
+        <ion-item class="mb-6 rounded-lg shadow-sm" lines="none">
+          <ion-label position="floating" color="medium">Data de devolução prevista (AAAA-MM-DD)</ion-label>
+          <ion-input type="date" [(ngModel)]="emprestimo.data_devolucao_prevista" name="data_devolucao_prevista"></ion-input>
+        </ion-item>
 
       </ion-list>
       

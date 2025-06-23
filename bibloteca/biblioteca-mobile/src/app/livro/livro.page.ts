@@ -1,18 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, LoadingController, NavController, ToastController, IonButtons, IonMenuButton, IonText, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonList, IonItem, IonItemSliding, IonThumbnail, IonLabel, IonItemOptions, IonItemOption } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, LoadingController, NavController, ToastController, IonButtons, IonMenuButton, IonText, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonList, IonItem, IonItemSliding, IonThumbnail, IonLabel, IonItemOptions, IonItemOption,IonSelect, IonSelectOption } from '@ionic/angular/standalone';
 import { Storage } from '@ionic/storage-angular';
 import { Livro } from './livro.model';
 import { Usuario } from '../home/usuario.model';
 import { CapacitorHttp, HttpOptions, HttpResponse } from '@capacitor/core';
+import { IonInput, IonButton } from '@ionic/angular/standalone';
+
 
 @Component({
   standalone: true,
   selector: 'app-livro',
   templateUrl: './livro.page.html',
   styleUrls: ['./livro.page.scss'],
-  imports: [IonItemOption, IonItemOptions, IonLabel, IonItemSliding, IonItem, IonList, IonCardContent, IonCardSubtitle, IonCardTitle, IonCardHeader, IonCard, IonText, IonButtons, IonMenuButton, IonContent, IonHeader, IonTitle, IonToolbar, IonThumbnail, CommonModule, FormsModule],
+  imports: [IonItemOption, IonItemOptions, IonLabel, IonItemSliding,IonInput,IonButton, IonItem, IonList, IonCardContent, IonCardSubtitle, IonCardTitle, IonCardHeader, IonCard, IonText, IonButtons, IonMenuButton, IonContent, IonHeader, IonTitle, IonToolbar, IonThumbnail, CommonModule, IonSelect, IonSelectOption, FormsModule],
   providers: [Storage]
 })
 export class LivroPage implements OnInit {
@@ -26,6 +28,7 @@ export class LivroPage implements OnInit {
     public controle_navegacao: NavController,
     public controle_carregamento: LoadingController
   ) { }
+
 
   async ngOnInit() {
 
@@ -92,7 +95,7 @@ export class LivroPage implements OnInit {
         'Content-Type': 'application/json',
         'Authorization': `Token ${this.usuario.token}`
       },
-      url: `http://127.0.0.1:8000/livro/api/${id}`,
+      url: `http://127.0.0.1:8000/livro/api/${id}/`,
     };
 
     CapacitorHttp.delete(options)
@@ -120,7 +123,6 @@ export class LivroPage implements OnInit {
         this.apresenta_mensagem('Falha ao excluir o livro: código ${erro?.status}');
       });
   }
-
   async apresenta_mensagem(texto: string) {
     const mensagem = await this.controle_toast.create({
       message: texto,
@@ -133,5 +135,8 @@ export class LivroPage implements OnInit {
     const loading = this.controle_carregamento.create({message: 'Pegar livro emprestado...', duration: 1000});
     this.controle_navegacao.navigateRoot('/emprestimo');
 
+  }
+  irCriarLivro() {
+    this.controle_navegacao.navigateForward('/livro-criar'); // Ou '/livro/novo'
   }
 }

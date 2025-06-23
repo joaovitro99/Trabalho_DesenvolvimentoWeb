@@ -8,6 +8,9 @@ from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
+from rest_framework.views import APIView
+from rest_framework import status
+from .serializers import UserRegistrationSerializer
 class Login(View):
     def get(self, request):
         contexto = {'mensagem': '', 'base_html': 'base.html'}
@@ -48,15 +51,10 @@ class CadastroView(View):
     def post(self, request):
 
         # Obtém os dados do formulário POST
-        nome_usuario = request.POST.get('nome_usuario')
+        nome_usuario = request.POST.get('user')
         email = request.POST.get('email')
         senha = request.POST.get('senha')
         confirmar_senha = request.POST.get('confirmar_senha')
-
-       
-        if not all([nome_usuario, email, senha, confirmar_senha]):
-            messages.error(request, 'Todos os campos são obrigatórios.')
-            return render(request, 'bibloteca/cadastro.html')
 
         if senha != confirmar_senha:
             messages.error(request, 'As senhas não coincidem.')
@@ -73,7 +71,7 @@ class CadastroView(View):
         
         try:
             user = User.objects.create_user(username=nome_usuario, email=email, password=senha)
-            user.save() # Salva o usuário no banco de dados
+            user.save() 
 
             user_auth = authenticate(request, username=nome_usuario, password=senha)
             if user_auth is not None:
@@ -107,3 +105,22 @@ class LoginAPI(ObtainAuthToken):
             'token': token.key
 
         })
+class CadastroAPI(APIView):
+    serializer_class = UserRegistrationSerializer 
+    def post(self, request, *args, **kwargs):
+        serializer = self.serializer_class(
+            data = request.data,
+            context={
+                'request': request
+            }
+        )
+        serializer.is_valid(raise_exception=True)
+        user = serializer.save()
+        token, created = Token.objects.get_or_create(user=user)
+
+        return Response({
+            'id': user.id,
+            'nome': user.username, 
+            'email': user.email,
+            'token': token.key
+        }, status=status.HTTP_201_CREATED)

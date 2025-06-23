@@ -10,14 +10,15 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-button expand="block" (click)="irEmprestimo()" >Pegar livro emprestado</ion-button>
-
 <ion-content [fullscreen]="true">
   <ion-card>
     <ion-card-header>
       <ion-card-title>Desenvolvimento webmobile</ion-card-title>
       <ion-card-subtitle>Aplicativo Livros</ion-card-subtitle>
     </ion-card-header>
+
+    <ion-button expand="block" (click)="irEmprestimo()" >Pegar livro emprestado</ion-button>
+
     <ion-card-content>
       <ion-list>
         <ion-item-sliding *ngFor="let livro of lista_livros">
@@ -42,4 +43,7 @@
       </ion-list>
     </ion-card-content>
   </ion-card>
+
+  <ion-button expand="block" (click)="irCriarLivro()" >adicionar livro</ion-button>
+
 </ion-content>
