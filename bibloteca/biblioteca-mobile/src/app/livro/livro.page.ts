@@ -139,4 +139,8 @@ export class LivroPage implements OnInit {
   irCriarLivro() {
     this.controle_navegacao.navigateForward('/livro-criar'); // Ou '/livro/novo'
   }
+  irEditar(id: number) {
+  this.controle_navegacao.navigateForward(`/livro-editar/${id}`);
+}
+
 }

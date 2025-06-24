@@ -12,4 +12,5 @@ urlpatterns= [
     path('autor/api/',APIListarAutores.as_view(), name='api-listar-autores'),
     path('api/<int:pk>/',APIDeletarlivros.as_view(), name='api-deletar-livros'),
     path('api/criar/',APICriarLivros.as_view(), name='api-criar-livros'),
+    path('api/editar/<int:pk>/',APIEditarLivros.as_view(), name='api-editar-livros'),
 ]

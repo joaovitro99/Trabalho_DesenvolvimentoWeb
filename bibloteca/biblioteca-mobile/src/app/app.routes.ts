@@ -26,4 +26,10 @@ export const routes: Routes = [
     path: 'livro-criar',
     loadComponent: () => import('./livro-criar/livro-criar.page').then( m => m.LivroCriarPage)
   },
+  {
+    path: 'livro-editar/:id',
+    loadComponent: () => import('./livro-editar/livro-editar.page').then( m => m.LivroEditarPage)
+  },
+  
+ 
 ];

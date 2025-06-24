@@ -6,5 +6,7 @@ urlpatterns= [
     path('novo/',CriarEmprestimos.as_view(),name='criar-emprestimos'),
     path('deletar/<int:pk>/',DeletarEmprestimos.as_view(),name='deletar-emprestimos'),
     path('<int:pk>/',EditarEmprestimos.as_view(),name='editar-emprestimos'),
+    path('api/',APICriarEmprestimos.as_view(), name='api-criar-emprestimos'),
+    
     
 ]

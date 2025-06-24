@@ -148,7 +148,7 @@ export class EmprestimoPage implements OnInit {
       if (resposta.status === 201) {
         await this.apresenta_mensagem('Empréstimo registrado com sucesso!');
         loading.dismiss();
-        this.controle_navegacao.navigateRoot('/home');
+        this.controle_navegacao.navigateRoot('/emprestimo-listar');
       } else {
         loading.dismiss();
         console.error('Erro na resposta da API:', resposta);

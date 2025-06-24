@@ -1,3 +1,5 @@
+import { Livro } from "../livro/livro.model";
+
 export class Emprestimo
 {
   public id: number;

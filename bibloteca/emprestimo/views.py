@@ -3,10 +3,13 @@ from django.urls import reverse_lazy
 from emprestimo.models import Emprestimo
 from emprestimo.forms import FormularioEmprestimo
 from django.views.generic import ListView,CreateView,View,UpdateView,DeleteView
+from rest_framework.generics import CreateAPIView,ListAPIView,DestroyAPIView
 from django.http import FileResponse,Http404
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.mixins import LoginRequiredMixin
-
+from rest_framework.authentication import TokenAuthentication
+from emprestimo.serializers import SerializadorEmprestimo
+from rest_framework import permissions
 # Create your views here.
 class ListarEmprestimos(LoginRequiredMixin, ListView):
     model = Emprestimo 
@@ -74,3 +77,12 @@ class DeletarEmprestimos(LoginRequiredMixin, DeleteView):
         context = super().get_context_data(**kwargs)
         context['base_html'] = 'base.html' 
         return context
+    
+class APICriarEmprestimos(CreateAPIView):
+    serializer_class = SerializadorEmprestimo
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
+
+
+
+       
